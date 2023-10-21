@@ -44,8 +44,13 @@ public final class SkinUtil {
                 if (propertyMap.containsKey("textures")) {
                     Collection<Property> propertyCollection = propertyMap.get("textures");
 
-                    return !propertyCollection.isEmpty()
-                            ? propertyCollection.stream().findFirst().get().getValue() : null;
+                    try {
+                        return !propertyCollection.isEmpty()
+                                ? propertyCollection.stream().findFirst().get().getValue() : null;
+                    } catch (NoSuchMethodError e) {
+                        e.printStackTrace();
+                        Bukkit.getLogger().warning("Cannot get texture (textures) property for " + propertyCollection);
+                    }
                 }
             }
         } else {
@@ -77,8 +82,13 @@ public final class SkinUtil {
                 if (propertyMap.containsKey("textures")) {
                     Collection<Property> propertyCollection = propertyMap.get("textures");
 
-                    return !propertyCollection.isEmpty()
-                            ? propertyCollection.stream().findFirst().get().getSignature() : null;
+                    try {
+                        return !propertyCollection.isEmpty()
+                                ? propertyCollection.stream().findFirst().get().getSignature() : null;
+                    } catch (NoSuchMethodError e) {
+                        e.printStackTrace();
+                        Bukkit.getLogger().warning("Cannot get signatures (textures) property for " + propertyCollection);
+                    }
                 }
             }
         }
